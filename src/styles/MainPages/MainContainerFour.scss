@@ -1,0 +1,239 @@
+@import "../Main/index";
+
+@mixin byPointer {
+  box-shadow: 0px 2px 8px 2px rgba(141, 150, 178, .3);
+  transform: scale(1.02);
+
+}
+
+@mixin mainDivTheme {
+  box-shadow: 2px 2px 20px 5px rgba(141, 150, 178, .3);
+  border-radius: 6px;
+  width: 370px;
+  margin: 5px;
+  &:hover {
+    @include byPointer
+  }
+}
+
+@mixin main {
+  background: #fafafa;
+  position: relative;
+  width: 97%;
+  left: 6px;
+  top: -4px;
+  height: 357px;
+  border-radius: 4px;
+
+  .mainPrice {
+    font-size: 30px;
+    margin: 2px 1px 1px 1px;
+    padding: 10px 0px 0px 17px;
+  }
+
+  .secondPrice {
+    display: inline;
+    font-size: 18px;
+    bottom: 30px;
+    left: 150px;
+    position: relative;
+    opacity: 0.5;
+    margin: 2px 1px 1px 1px;
+    text-decoration: line-through;
+  }
+
+  .prDes {
+    padding-left: 15px;
+  }
+
+  .tariff {
+    padding-left: 15px;
+
+    ul {
+      padding: 0;
+      line-height: 25px;
+    }
+
+    ul li {
+      display: flex;
+
+      p {
+        margin: 0 0 0 10px;
+      }
+    }
+  }
+
+  .mainBtn {
+    border: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    width: 80%;
+    margin-top: 10%;
+    margin-left: 10%;
+
+
+    padding: 10px 15px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: full-width;
+    color: $base-main-white-color;
+    background: $base-second-blue-color;
+    transition: 0.2s;
+
+    &:hover {
+      box-shadow: 0px 2px 8px 2px rgba(141, 150, 178, .3);
+      transform: scale(1.02);
+    }
+  }
+}
+
+@mixin headTheme {
+  h2 {
+    font-size: 30px;
+  }
+
+  img {
+    position: relative;
+    bottom: -2px;
+    right: 162px;
+    height: 90px;
+    transform: rotate(15deg);
+  }
+
+  p {
+    position: relative;
+    bottom: -69px;
+    font-size: 18px;
+    white-space: nowrap;
+    left: -127px;
+  }
+}
+
+.lastSection {
+  margin: 5px 20px 8px 15px;
+  padding: 0;
+
+  h1 {
+    font-family: 'Ferry', sans-serif;
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+  }
+
+  .lastDivDiv {
+    display: flex;
+    justify-content: space-around;
+    padding: 3px 3px 7px 2px;
+    margin: 4px 4px 40px 3px;
+
+    .mapIdElOne {
+      background: $base-second-orange-color;
+      cursor: pointer;
+
+
+      .head {
+        margin: 5px 25px;
+        display: flex;
+        height: 132px;
+        @include headTheme
+      }
+
+      .main {
+
+
+        @include main
+      }
+
+      @include mainDivTheme
+    }
+
+    .mapIdElTwo {
+      background: $base-second-lightblue-color;
+      cursor: pointer;
+
+
+      .head {
+        margin: 5px 25px;
+        display: flex;
+        height: 132px;
+
+        h2 {
+          font-size: 30px;
+        }
+
+        img {
+          position: relative;
+          bottom: 15px;
+          right: 27px;
+          height: 145px;
+          transform: rotate(7deg);
+        }
+
+        p {
+          position: relative;
+          bottom: -69px;
+          font-size: 18px;
+          white-space: nowrap;
+          left: -49px;
+        }
+
+      }
+
+      .main {
+
+
+        @include main
+      }
+
+      @include mainDivTheme
+
+    }
+
+    .mapIdElThree {
+      background: $base-main-black-color;
+      cursor: pointer;
+
+
+      .head {
+        margin: 5px 25px;
+        display: flex;
+        height: 132px;
+        color: $base-main-white-color;
+        @include headTheme
+
+      }
+
+      .main {
+
+
+        @include main
+
+      }
+
+      @include mainDivTheme
+    }
+  }
+}
+
+
+.hereOne {
+  display: none;
+}
+
+.hereTwo {
+  display: none;
+}
+
+.hereThree {
+  display: none;
+}
+
+.hereAnother {
+  background: #5970FF;
+  display: inline;
+
+}

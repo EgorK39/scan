@@ -1,0 +1,62 @@
+@import "../Main/index";
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 1px 0 1px 30px;
+
+  .answerDiv {
+    margin-top: 10px;
+
+  }
+
+  .answerButton {
+    margin: 10px 30%;
+    border: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: none;
+    cursor: pointer;
+
+    padding: 10px 15px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: full-width;
+    color: $base-main-white-color;
+    background: $base-second-blue-color;
+    transition: 0.2s;
+
+    &:hover {
+      box-shadow: 0px 2px 8px 2px rgba(141, 150, 178, .3);
+      transform: scale(1.02);
+    }
+  }
+
+  h1 {
+    font-family: 'Ferry', sans-serif;
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+  }
+
+  .komplexP {
+    font-size: 20px;
+  }
+
+  .rectangle {
+    position: relative;
+    display: flex;
+    width: 55px;
+    height: 50px;
+    top: 57px;
+    left: 471px;
+
+  }
+
+  img {
+    max-width: 550px;
+  }
+
+}

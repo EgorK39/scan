@@ -1,0 +1,58 @@
+@import "index";
+
+@mixin section {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+}
+
+@mixin hovered {
+  transition: .1s;
+  transform: scale(1.02);
+}
+
+.header {
+  height: 93px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+
+
+  li {
+    padding: 5px 15px;
+  }
+
+  .sectionOne {
+    @include section;
+
+  }
+
+  .sectionTwo {
+    @include section;
+
+    .btn-border-right {
+      border-right: 3px solid $base-main-green-color;
+    }
+
+    .btn-opacity {
+      opacity: 0.4;
+    }
+
+    .btn-change-color {
+      background: $base-second-lightblue-color;
+      border-radius: 3px;
+      margin-left: 7px;
+
+      &:hover {
+        @include hovered;
+      }
+
+    }
+  }
+
+  .section-hovered:hover {
+    @include hovered;
+    background-color: $base-main-white-color;
+    border-radius: 3px;
+  }
+}

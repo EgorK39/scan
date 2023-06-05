@@ -1,0 +1,47 @@
+$base-main-green-color: #029491;
+$base-main-black-color: #000000;
+$base-main-white-color: #fafafa;
+
+$base-second-orange-color: #FFB64F;
+$base-second-lightblue-color: #7CE3E1;
+$base-second-blue-color: #5970FF;
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'),
+  url("../../fonts/Inter/Inter-Regular.ttf") format('truetype');
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif;
+
+  font-weight: 400;
+  font-size: 14px;
+}
+
+@font-face {
+  font-family: 'Ferry';
+  src: local('Ferry'),
+  url("../../fonts/Ferry/ferry_black.otf") format('truetype');
+}
+
+.font-ferry {
+  font-family: 'Ferry', sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+
+  a {
+    text-decoration: none;
+    color: $base-main-black-color;
+
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+
+}

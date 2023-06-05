@@ -1,0 +1,26 @@
+@import "../Main/index";
+
+.mainImgSection {
+  margin: 15px 0 20px 30px;
+
+  .mainImgDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0 30px 9px 0px;
+    padding: 5px 3px;
+
+    .Untitled {
+      position: relative;
+      left: 30px;
+      bottom: 20px;
+    }
+
+    .Group203 {
+      width: 380px;
+      transform: rotate(20deg);
+      position: relative;
+      right: 20px;
+    }
+  }
+}

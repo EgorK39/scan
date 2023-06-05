@@ -1,0 +1,28 @@
+@import "../Main/index";
+
+
+.sectionAuth {
+  margin: 0px 5px 0px 20px;
+  display: flex;
+  justify-content: space-evenly;
+
+  .mainAuthText {
+    h1 {
+      font-family: 'Ferry', sans-serif;
+      font-size: 45px;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: 0.01em;
+    }
+  }
+
+  .mainAuthImg {
+    position: relative;
+    max-width: 1200px;
+    left: 5%;
+
+    img {
+      height: 300px;
+    }
+  }
+}

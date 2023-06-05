@@ -1,14 +1,35 @@
 import * as React from 'react';
-import '../styles/App.css';
+import Header from './Header';
+import Footer from './Footer';
+import Main from "./Main";
+import '../styles/Main/App.scss';
+import {
+    Route, Routes
+} from "react-router-dom";
+import Login from "./loginPage/Login";
+import {connect} from "react-redux";
 
-class App extends React.Component<any, any> {
-    render() {
-        return (
-            <div>
-                <h1>Hello</h1>
-            </div>
-        );
-    }
+function App(props) {
+
+
+    return (
+        <>
+            <Header/>
+            <Routes>
+                <Route path={'/login'}
+                       element={<Login/>}/>
+                <Route path={'*'}
+                       element={<Main/>}/>
+            </Routes>
+            <Footer/>
+        </>
+    );
+
 }
 
-export default App;
+export default connect(
+    state => ({
+        reduxStorage: state,
+    }),
+    dispatch => ({})
+)(App);

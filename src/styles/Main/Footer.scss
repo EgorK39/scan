@@ -1,0 +1,21 @@
+@import "index";
+
+.footer {
+  background: $base-main-green-color;
+  display: flex;
+  justify-content: space-between;
+  height: 137px;
+  padding: 10px 25px;
+
+  .footerDiv {
+    color: $base-main-white-color;
+    text-align: end;
+    padding: 0 10px;
+
+    p {
+      margin: 1px 0;
+    }
+
+
+  }
+}
