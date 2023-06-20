@@ -1,0 +1,39 @@
+@import "../Main/index";
+
+.searchFormSectionThree {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  left: 70px;
+  margin-top: 25px;
+  width: 255px;
+
+  button {
+    opacity: 0.6;
+    border: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    width: 100%;
+
+    padding: 10px 15px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: full-width;
+    color: $base-main-white-color;
+    background: $base-second-blue-color;
+    transition: 0.2s;
+
+    &:hover {
+      box-shadow: 0px 2px 8px 2px rgba(141, 150, 178, .3);
+      transform: scale(1.02);
+    }
+  }
+
+  .inputField {
+    text-decoration: none;
+    opacity: 0.6;
+  }
+}

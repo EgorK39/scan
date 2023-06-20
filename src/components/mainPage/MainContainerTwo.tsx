@@ -32,10 +32,6 @@ function MainContainerTwo() {
     }
 
     function handleClickLeft() {
-        console.log('count', count);
-        console.log('ref', ref);
-        console.log('stepCounter', stepCounter);
-        console.log('ref.current.children[0].clientWidth', ref.current.children[0].clientWidth);
 
         animate()
         if (stepCounter <= 0) {
@@ -47,19 +43,12 @@ function MainContainerTwo() {
         }
     }
 
-    const stepTimer = setTimeout(handleClickRight, 3000);
-
     return (
         <div className='wrapper'>
             <h1 className={'font-ferry'}>
                 Почему именно мы
             </h1>
-            <div onMouseOver={event => {
-                {
-                    event ? clearTimeout(stepTimer) : stepTimer
-                }
-            }
-            }  className='carousel'>
+            <div className='carousel'>
                 <div className='btn-carousel'>
                     <button onClick={handleClickLeft} className='left'><img src='./images/links.svg'/></button>
                 </div>

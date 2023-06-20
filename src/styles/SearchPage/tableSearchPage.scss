@@ -1,0 +1,45 @@
+@import "../Main/index";
+
+
+.searchFormSectionTwo {
+  .checkbox {
+    display: none;
+  }
+
+  .fake {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    position: relative;
+    border-radius: 2px;
+  }
+
+  .fake::before {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: url("../../components/SearchPage/images/icons8-галочка-96 4.svg");
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    transition: 0.2s;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .checkbox:checked + .fake::before {
+    opacity: 1;
+  }
+
+  .textEl {
+    margin-left: 15px;
+    line-height: 22px;
+    cursor: pointer;
+  }
+
+  .label {
+    opacity: 0.5;
+  }
+}

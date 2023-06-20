@@ -6,14 +6,27 @@
   .login {
     opacity: 0.6;
 
+    .bc {
+      border-radius: 4px;
+      border: 2px #FF5959 solid;
+      color: #FF5959;
+    }
+
     div input {
       width: 337px;
       height: 30px;
+
     }
   }
 
   .password {
     opacity: 0.6;
+
+    .bc {
+      border-radius: 4px;
+      border: 2px #FF5959 solid;
+      color: #FF5959;
+    }
 
     div input {
       width: 337px;
@@ -54,6 +67,7 @@
   .rebornPassword {
     text-decoration: underline;
     opacity: 0.6;
+    margin-top: 15px;
   }
 }
 
@@ -82,3 +96,4 @@
   }
 
 }
+

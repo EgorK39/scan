@@ -1,5 +1,6 @@
 import '../../styles/MainPages/MainContainerOne.scss';
 import * as React from 'react';
+import {Link} from "react-router-dom";
 
 function MainContainerOne() {
     return (
@@ -16,7 +17,10 @@ function MainContainerOne() {
                     в формате PDF на электронную почту.
                 </p>
                 <div className={'answerDiv'}>
-                    <button className={'answerButton'}>Запросить данные</button>
+                    <Link to={'search'}>
+                        <button className={'answerButton'}>Запросить данные</button>
+                    </Link>
+
                 </div>
             </div>
             <div>

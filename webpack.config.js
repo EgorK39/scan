@@ -10,7 +10,9 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, '/dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/'
+
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -54,5 +56,9 @@ module.exports = {
                 type: 'asset/inline'
             }
         ]
+    },
+    devServer: {
+        historyApiFallback: true,
+
     }
 }
