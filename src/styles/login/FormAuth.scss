@@ -61,3 +61,24 @@
     }
   }
 }
+
+@media screen and (max-width: 699px) {
+  .authForm {
+    width: 300px;
+    margin-top: 80px;
+    height: 450px;
+
+    .authBtns {
+      .btn-auth-one {
+        width: 110px;
+      }
+    }
+
+
+    .lock {
+      bottom: 440px;
+      right: -95px;
+      height: 75px;
+    }
+  }
+}

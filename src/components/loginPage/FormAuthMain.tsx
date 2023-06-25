@@ -167,9 +167,12 @@ export default function FormAuthMain() {
             </div>
             <div className={'entryByWhat'}>
                 <p>Войти через:</p>
-                <button><img src={require('./authImg/google-2015.svg')}/></button>
-                <button><img src={require('./authImg/facebook-5.svg')}/></button>
-                <button><img src={require('./authImg/yandex-logo-2021-russian-2.svg')}/></button>
+                <div className={'entryByWhatMobile'}>
+                    <button><img src={require('./authImg/google-2015.svg')}/></button>
+                    <button><img src={require('./authImg/facebook-5.svg')}/></button>
+                    <button><img src={require('./authImg/yandex-logo-2021-russian-2.svg')}/></button>
+
+                </div>
             </div>
         </>
     )

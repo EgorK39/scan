@@ -69,7 +69,7 @@ const TableSearchPage = (props) => {
                     </tr>}
                 </tbody>
             </table>
-            <BtnSearchPage/>
+            <BtnSearchPage btnToBtn={props.btnToTable}/>
         </div>
     )
 }

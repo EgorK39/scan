@@ -24,8 +24,8 @@ function MainContainerOne() {
                 </div>
             </div>
             <div>
-                <img className="rectangle" src="./images/Rectangle 13.svg"/>
-                <img src="./images/2398%201.svg"/>
+                <img className="rectangle" src="../images/Rectangle 13.svg"/>
+                <img src="../images/2398%201.svg"/>
             </div>
         </div>
     )

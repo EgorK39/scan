@@ -60,3 +60,46 @@
   }
 
 }
+
+
+@media screen and (max-width: 699px) {
+  .flex-container {
+    flex-direction: column;
+    margin: 1px 12px 1px 10px;
+
+    .rectangle {
+      position: relative;
+      width: 35px;
+      height: 35px;
+      top: 31px;
+      z-index: 0;
+      left: 248px;
+    }
+
+    h1 {
+      font-size: 28px;
+
+    }
+
+    .komplexP {
+      font-size: 18px;
+
+    }
+
+    .answerDiv {
+      margin-top: 32px;
+
+      .answerButton {
+        margin: 0;
+        width: 100%;
+
+      }
+    }
+
+    img {
+      max-width: 300px;
+
+    }
+  }
+
+}

@@ -80,3 +80,52 @@
     }
   }
 }
+
+@media screen and (max-width: 699px) {
+  .wrapper {
+    margin: 20px 12px 10px 10px;
+
+    h1 {
+      font-size: 28px
+    }
+
+    .carousel {
+      min-width: 0;
+      max-width: 0;
+
+      .btn-carousel {
+        position: relative;
+        z-index: 1;
+        right: 25px;
+
+
+        .left {
+          padding: 20px 0 20px 0;
+          left: 15px;
+        }
+
+        .right {
+          padding: 20px 0 20px 0;
+          right: 0;
+        }
+      }
+
+      .carousel-container {
+        position: relative;
+        left: -20px;
+        max-width: 250px;
+        min-width: 250px;
+
+        .carousel-slider {
+          div {
+            min-width: 234px;
+            max-width: 234px;
+            margin: 5px 10px;
+            height: 190px;
+          }
+        }
+      }
+    }
+  }
+}
+

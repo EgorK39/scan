@@ -213,3 +213,63 @@
 
 
 }
+
+@mixin mobileLastDiv {
+  width: 280px;
+  margin: 5px 0 5px 7px;
+
+  .head {
+    display: block;
+    margin: 5px 10px;
+
+    p {
+      bottom: -25px;
+      left: 0;
+      font-size: 17px;
+    }
+
+    img {
+      bottom: 113px;
+      left: 146px;
+    }
+  }
+  .main {
+    .secondPrice {
+      bottom: 15px;
+
+    }
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .lastSection {
+    margin: 0;
+
+    h1 {
+      font-size: 28px;
+      margin-left: 15px;
+    }
+
+    .lastDivDiv {
+      flex-direction: column;
+
+
+      .mapIdElOne {
+        @include mobileLastDiv;
+
+      }
+
+      .mapIdElTwo {
+        @include mobileLastDiv;
+
+
+      }
+
+      .mapIdElThree {
+        @include mobileLastDiv;
+
+
+      }
+    }
+  }
+}

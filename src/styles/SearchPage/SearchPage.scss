@@ -70,3 +70,83 @@
 
   }
 }
+
+@mixin searchFormInput {
+  height: 25px;
+  width: 270px;
+}
+
+@media screen and (max-width: 699px) {
+  .searchPage {
+    width: 300px;
+
+    .h1AndP {
+      position: relative;
+    }
+
+    .h1AndP h1 {
+      font-size: 28px;
+    }
+
+    .h1AndP p {
+      font-size: 18px;
+    }
+
+    .h1AndP img {
+      position: absolute;
+      height: 60px;
+      right: 7px;
+      bottom: 50px;
+    }
+
+    .searchForm {
+      width: 300px;
+      flex-direction: column;
+
+      .searchFormSectionOne {
+        margin: 0 5px 0 8px;
+
+        .enterInn input {
+          @include searchFormInput;
+        }
+
+        .tonality {
+          img {
+            left: 240px;
+            top: -23px;
+            height: 15px;
+          }
+
+          input {
+            @include searchFormInput;
+
+          }
+
+          .searchUl {
+            width: 275px;
+            bottom: -44px;
+          }
+        }
+
+        .rangeOfSearchMobile {
+          display: flex;
+          flex-direction: column;
+
+          input {
+            margin-top: 8px;
+            @include searchFormInput;
+
+          }
+        }
+
+        .enterDocs {
+          .myNumInput {
+            @include searchFormInput;
+
+          }
+
+        }
+      }
+    }
+  }
+}

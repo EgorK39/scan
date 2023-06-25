@@ -97,3 +97,34 @@
 
 }
 
+@media screen and (max-width: 699px) {
+  .login-and-password {
+    margin: 35px 5px 30px 16px;
+
+    .login {
+      div input {
+        width: 260px;
+      }
+    }
+
+    .password {
+      div input {
+        width: 260px;
+      }
+    }
+  }
+  .entryByWhat {
+    margin: 8px 2px 0 10px;
+
+    .entryByWhatMobile {
+      button {
+        margin: 2px;
+
+        img {
+          width: 75px;
+        }
+      }
+    }
+
+  }
+}

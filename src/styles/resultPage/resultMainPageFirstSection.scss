@@ -12,3 +12,24 @@
 
   }
 }
+
+@media screen and (max-width: 699px) {
+  .resultMainPageFirstSection {
+    flex-direction: column;
+
+    div h1 {
+      font-size: 24px;
+    }
+
+    .resultPageP {
+      font-size: 15px;
+    }
+
+    .resultPageImg {
+      img {
+        width: 305px;
+      }
+    }
+  }
+}
+

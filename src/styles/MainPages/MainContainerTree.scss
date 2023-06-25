@@ -24,3 +24,22 @@
     }
   }
 }
+
+@media screen and (max-width: 699px) {
+  .mainImgSection {
+    margin: 10px 0 20px 15px;
+
+    .mainImgDiv {
+      .Untitled {
+        left: 0;
+        bottom: 0;
+        width: 290px;
+
+      }
+
+      .Group203 {
+        display: none;
+      }
+    }
+  }
+}

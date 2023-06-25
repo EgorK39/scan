@@ -19,3 +19,38 @@
 
   }
 }
+
+@mixin zeroingOfFooter {
+  margin: 0;
+  padding: 0;
+  li p {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .footer {
+    padding: 0 5px 0 5px;
+
+    .footerDiv {
+      padding: 0 15px 0 0;
+
+      .firstFooterUl {
+        @include zeroingOfFooter;
+        margin: 15px 0 13px 0;
+
+
+        .nowrap {
+          white-space: nowrap;
+        }
+      }
+
+      .secondFooterUl {
+        @include zeroingOfFooter;
+
+      }
+    }
+  }
+}
+
+

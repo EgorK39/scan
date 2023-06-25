@@ -1,6 +1,9 @@
 import * as React from "react";
 import "../../styles/SearchPage/SearchPage.scss";
 import TableSearchPage from "./tableSearchPage";
+import {useEffect} from "react";
+import {useMediaQuery} from "react-responsive";
+import BtnSearchPage from "./btnSearchPage";
 
 
 export default function SearchPage() {
@@ -17,6 +20,15 @@ export default function SearchPage() {
     const [innData, setInnData] = React.useState('');
 
     const [liData, setLiData] = React.useState('Любая');
+
+
+    const [startDate, setStartDate] = React.useState('')
+    const [endDate, setEndDate] = React.useState('')
+    const [today, setToday] = React.useState('')
+    const [dateError, setDateError] = React.useState('Введите корректные данные')
+    const [formDate, setFormDate] = React.useState(false)
+
+    const [formValid, setFormValid] = React.useState(false)
 
 
     const normalizeNumber = (value) => {
@@ -45,6 +57,12 @@ export default function SearchPage() {
             case 'numInput':
                 setNumberInput(true)
                 break;
+            case 'startDateInput':
+                setFormDate(true)
+                break;
+            case 'endDateInput':
+                setFormDate(true)
+                break;
 
         }
     }
@@ -65,21 +83,81 @@ export default function SearchPage() {
     }
 
 
+    useEffect(() => {
+        setToday(new Date().toISOString().substring(0, 10))
+    }, [])
+
+    useEffect(() => {
+        if (innError || numberInputError || dateError) {
+            setFormValid(false)
+        } else {
+            setFormValid(true)
+        }
+
+    }, [innError, numberInputError, dateError])
+
+    function changeDate(event) {
+        switch (event.target.name) {
+            case 'startDateInput':
+                if (Date.parse(event.target.value) > Date.parse(today)) {
+                    setDateError('Введите корректные данные')
+                } else {
+                    if (Date.parse(event.target.value) > Date.parse(endDate)) {
+                        setDateError('Введите корректные данные')
+                    } else {
+                        setDateError('')
+                        setStartDate(event.target.value)
+                    }
+                }
+                break;
+            case 'endDateInput':
+                if (Date.parse(event.target.value) > Date.parse(today)) {
+                    setDateError('Введите корректные данные')
+                } else {
+                    if (Date.parse(event.target.value) < Date.parse(startDate)) {
+                        setDateError('Введите корректные данные')
+                    } else {
+                        setDateError('')
+                        setEndDate(event.target.value)
+                    }
+                }
+                break;
+        }
+    }
+
+    const isMobile = useMediaQuery({
+        query: '(max-width: 699px)'
+    })
+    const isDesktopOrLaptop = useMediaQuery({
+        query: '(min-width: 700px)'
+    })
     return (
         <div className={'searchPage'}>
-            <div>
-                <h1 className={'font-ferry'}>
+            <div className={'h1AndP'}>
+                {isDesktopOrLaptop && (<h1 className={'font-ferry'}>
                     Найдите необходимые<br/>
                     данные в пару кликов.
-                </h1>
-                <p>
+                </h1>)}
+                {isMobile && (<h1 className={'font-ferry'}>
+                    Найдите<br/> необходимые<br/>
+                    данные в пару<br/> кликов.
+                </h1>)}
+
+                {isDesktopOrLaptop && (<p>
                     Задайте параметры поиска.<br/>
                     Чем больше заполните, тем точнее поиск
+                </p>)}
+                {isMobile && (<><p>
+                    Задайте параметры поиска.<br/>
+                    Чем больше заполните,<br/>
+                    тем точнее поиск
                 </p>
+                    <img className={'pictureOne'} src={require('./images/Document.svg')}/></>)}
+
             </div>
             <div className={'searchForm'}>
                 <div className={'searchFormSectionOne'}>
-                    <div>
+                    <div className={'enterInn'}>
                         <p className={'innCompany'}>ИНН компании</p>
                         <input onChange={event => {
                             const {value} = event.target
@@ -112,7 +190,7 @@ export default function SearchPage() {
                             </ul>
                         )}
                     </div>
-                    <div>
+                    <div className={'enterDocs'}>
                         <p className={'countOfDocs'}>Количество документов в выдаче</p>
                         <input className={'myNumInput'} name={'numInput'}
                                onBlur={event => blurHandler(event)}
@@ -131,16 +209,32 @@ export default function SearchPage() {
                             }}>{numberInputError}</p>
                         )}
                     </div>
-                    <div>
+                    <div className={'rangeOfSearchMobile'}>
                         <p className={'rangeOfSearch'}>Диапазон поиска</p>
-                        <input type={"date"}/>
-                        <input type={"date"}/>
+                        <input name={'startDateInput'} value={startDate} onChange={event => changeDate(event)}
+                               onBlur={event => blurHandler(event)}
+                               type={"date"}/>
+                        <input name={'endDateInput'} value={endDate} onChange={event => changeDate(event)}
+                               onBlur={event => blurHandler(event)}
+                               type={"date"}/>
+                        {(formDate && (dateError)) && (
+                            <p style={{
+                                color: '#FF5959',
+                                textAlign: "center",
+                                margin: '5px 0'
+                            }}>{dateError}</p>
+                        )}
                     </div>
 
 
                 </div>
-                <TableSearchPage/>
+                {isDesktopOrLaptop && (
+                    <TableSearchPage btnToTable={formValid}/>
 
+                )}
+                {isMobile && (
+                    <BtnSearchPage btnToBtn={formValid}/>
+                )}
             </div>
         </div>
     )

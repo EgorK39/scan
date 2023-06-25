@@ -37,3 +37,16 @@
     opacity: 0.6;
   }
 }
+
+@media screen and (max-width: 699px) {
+  .searchFormSectionThree {
+    left: 0;
+    margin-left: 10px;
+
+    button {
+      width: 273px;
+      height: 45px;
+      font-size: 18px;
+    }
+  }
+}

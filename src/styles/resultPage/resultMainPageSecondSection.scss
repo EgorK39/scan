@@ -1,1 +1,107 @@
 @import "../Main/index";
+
+@mixin forTable {
+  width: 135px;
+  height: 150px;
+  padding: 10px 0 0 28px;
+}
+
+@mixin forImgBtn {
+  cursor: pointer;
+  height: 40px;
+}
+
+.resultMainPageSecondSection {
+  .generalInformation {
+
+  }
+
+  .resultPageContainer {
+    display: flex;
+    justify-content: center;
+
+    .resultPageContainerTwo {
+      display: flex;
+      align-items: center;
+
+      .resultPageСarousel {
+        display: flex;
+        border: 2px solid $base-main-green-color;
+        border-radius: 5px;
+        min-width: 975px;
+        max-width: 975px;
+        overflow: hidden;
+
+        .firstBlockСarousel {
+          background: $base-main-green-color;
+          z-index: 1;
+
+          .firstBlockСarouselTable {
+            font-size: 20px;
+            color: $base-main-white-color;
+            @include forTable;
+
+
+          }
+
+        }
+
+        .mainBlockСarousel {
+          display: flex;
+          transition: all 1s cubic-bezier(0.65, 0, 0.42, 1.01) 0s;
+
+          .secondBlockСarouselTable {
+            font-size: 18px;
+            position: relative;
+            text-align: center;
+            @include forTable;
+
+            &::after {
+              content: "";
+              height: 120px;
+              border-right: 2px solid black;
+              position: absolute;
+              right: -15px;
+              top: 12px;
+              opacity: 0.3;
+            }
+
+          }
+        }
+      }
+
+      .imgBtnLeft {
+        @include forImgBtn;
+      }
+
+      .imgBtnRight {
+        opacity: 0.4;
+        @include forImgBtn;
+
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .resultMainPageSecondSection {
+    .generalInformation {
+      h1 {
+        font-size: 28px;
+      }
+
+      span {
+        opacity: 0.5;
+      }
+    }
+
+    .resultPageContainer {
+
+      .resultPageContainerTwo {
+        .resultPageСarousel {
+
+        }
+      }
+    }
+  }
+}

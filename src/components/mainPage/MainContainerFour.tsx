@@ -79,15 +79,15 @@ function MainContainerFour(props) {
                                             <h2>{element.inclusive}</h2>
                                             <ul>
                                                 <li>
-                                                    <img src="./images/icons8-галочка-96%201.svg"/>
+                                                    <img src="../images/icons8-галочка-96%201.svg"/>
                                                     <p>{element.one}</p>
                                                 </li>
                                                 <li>
-                                                    <img src="./images/icons8-галочка-96%201.svg"/>
+                                                    <img src="../images/icons8-галочка-96%201.svg"/>
                                                     <p>{element.two}</p>
                                                 </li>
                                                 <li>
-                                                    <img src="./images/icons8-галочка-96%201.svg"/>
+                                                    <img src="../images/icons8-галочка-96%201.svg"/>
                                                     <p>{element.three}</p>
                                                 </li>
                                             </ul>

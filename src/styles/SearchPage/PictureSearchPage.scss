@@ -6,3 +6,24 @@
     width: 380px;
   }
 }
+
+@media screen and (max-width: 699px) {
+  .pictureSearchPage {
+    display: none;
+
+    .pictureOne {
+      position: relative;
+      left: -55px;
+      bottom: -126px;
+      height: 60px;
+    }
+
+    .pictureTwo {
+      display: none;
+    }
+
+    .pictureThree {
+      display: none;
+    }
+  }
+}

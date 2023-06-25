@@ -10,12 +10,12 @@ function Footer() {
                     <img src={require('../images/eqw 1.svg')}/>
                 </div>
                 <div className={'footerDiv'}>
-                    <ul>
-                        <li><p>г. Москва, Цветной б-р, 40</p></li>
+                    <ul className={'firstFooterUl'}>
+                        <li><p className={'nowrap'}>г. Москва, Цветной б-р, 40</p></li>
                         <li><p>+7 495 771 21 11</p></li>
                         <li><p>info@skan.ru</p></li>
                     </ul>
-                    <ul>
+                    <ul className={'secondFooterUl'}>
                         <li><p>Copyright. 2023</p></li>
                     </ul>
 
