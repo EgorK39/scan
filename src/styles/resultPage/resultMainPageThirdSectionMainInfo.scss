@@ -96,3 +96,51 @@
 
   }
 }
+
+@media screen and (max-width: 699px) {
+  .allPosts {
+    grid-template-columns: 1fr;
+
+    .post {
+      width: 290px;
+      margin-left: 5px;
+
+      .postMargin {
+        padding: 1px 10px 10px 10px;
+
+        .postHeader {
+          font-size: 12px;
+
+          .postHeaderUl li {
+            margin-right: 10px;
+          }
+        }
+
+        .nextPostHeader {
+          span {
+            font-size: 12px;
+          }
+        }
+
+        .postArticle {
+          img {
+            width: 270px;
+          }
+
+          article {
+            font-size: 12px;
+          }
+        }
+
+        .postFooter {
+          flex-direction: column;
+
+          .postFooterBtn {
+            width: 270px;
+          }
+        }
+      }
+
+    }
+  }
+}

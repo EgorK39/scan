@@ -5,7 +5,10 @@ import {useMediaQuery} from "react-responsive";
 
 const ResultMainPageSecondSection = (props) => {
     const [count, setCount] = useState(0)
+
     const ref = React.useRef(null);
+
+
     const isMobile = useMediaQuery({
         query: '(max-width: 699px)'
     })
@@ -15,24 +18,43 @@ const ResultMainPageSecondSection = (props) => {
 
     useEffect(() => {
         console.log('myRef', ref)
-    }, [])
+        setCount(0)
+    }, [isDesktopOrLaptop, isMobile])
 
     function myOnClickFunction(e) {
         console.log('778999999', e)
         console.log('778999999target', e.target)
+        console.log('ref.current.children.length', ref.current.children.length)
+
         switch (e.target.className) {
             case 'imgBtnLeft':
-                if (count === (ref.current.offsetWidth - 810)) {
-                    setCount(0)
-                } else {
-                    setCount(count + 135)
+                if (isDesktopOrLaptop) {
+                    if (count === (ref.current.offsetWidth - 810)) {
+                        setCount(0)
+                    } else {
+                        setCount(count + 135)
+                    }
+                } else if (isMobile) {
+                    if (count === ref.current.children[0].clientWidth * (ref.current.children.length - 1)) {
+                        setCount(0)
+                    } else {
+                        setCount(count + ref.current.children[0].clientWidth)
+                    }
                 }
                 break;
             case 'imgBtnRight':
-                if (count === 0) {
-                    setCount(ref.current.offsetWidth - 810)
-                } else {
-                    setCount(count - 135)
+                if (isDesktopOrLaptop) {
+                    if (count === 0) {
+                        setCount(ref.current.offsetWidth - 810)
+                    } else {
+                        setCount(count - 135)
+                    }
+                } else if (isMobile) {
+                    if (count === 0) {
+                        setCount(ref.current.children[0].clientWidth * (ref.current.children.length - 1))
+                    } else {
+                        setCount(count - ref.current.children[0].clientWidth)
+                    }
                 }
                 break;
 
@@ -55,7 +77,7 @@ const ResultMainPageSecondSection = (props) => {
                     <div className={'resultPageСarousel'}>
                         <div className={'firstBlockСarousel'}>
                             <table className={'firstBlockСarouselTable font-inter'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>Период</td>
                                 </tr>
@@ -71,7 +93,7 @@ const ResultMainPageSecondSection = (props) => {
                         <div ref={ref} style={{transform: `translateX(-${count}px)`}}
                              className={'mainBlockСarousel font-inter'}>
                             <table className={'secondBlockСarouselTable'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>10.09.2021</td>
                                 </tr>
@@ -84,7 +106,7 @@ const ResultMainPageSecondSection = (props) => {
                                 </tbody>
                             </table>
                             <table className={'secondBlockСarouselTable'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>10.09.2021</td>
                                 </tr>
@@ -97,7 +119,7 @@ const ResultMainPageSecondSection = (props) => {
                                 </tbody>
                             </table>
                             <table className={'secondBlockСarouselTable'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>10.09.2021</td>
                                 </tr>
@@ -110,7 +132,7 @@ const ResultMainPageSecondSection = (props) => {
                                 </tbody>
                             </table>
                             <table className={'secondBlockСarouselTable'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>10.09.2021</td>
                                 </tr>
@@ -123,7 +145,7 @@ const ResultMainPageSecondSection = (props) => {
                                 </tbody>
                             </table>
                             <table className={'secondBlockСarouselTable'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>10.09.2021</td>
                                 </tr>
@@ -136,7 +158,7 @@ const ResultMainPageSecondSection = (props) => {
                                 </tbody>
                             </table>
                             <table className={'secondBlockСarouselTable'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>10.09.2021</td>
                                 </tr>
@@ -149,7 +171,7 @@ const ResultMainPageSecondSection = (props) => {
                                 </tbody>
                             </table>
                             <table className={'secondBlockСarouselTable'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>10.09.2021</td>
                                 </tr>
@@ -162,7 +184,7 @@ const ResultMainPageSecondSection = (props) => {
                                 </tbody>
                             </table>
                             <table className={'secondBlockСarouselTable'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>10.09.2021</td>
                                 </tr>
@@ -175,7 +197,7 @@ const ResultMainPageSecondSection = (props) => {
                                 </tbody>
                             </table>
                             <table className={'secondBlockСarouselTable'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>10.09.2021</td>
                                 </tr>
@@ -188,7 +210,7 @@ const ResultMainPageSecondSection = (props) => {
                                 </tbody>
                             </table>
                             <table className={'secondBlockСarouselTable'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>10.09.2021</td>
                                 </tr>
@@ -201,7 +223,7 @@ const ResultMainPageSecondSection = (props) => {
                                 </tbody>
                             </table>
                             <table className={'secondBlockСarouselTable'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>10.09.2021</td>
                                 </tr>
@@ -214,7 +236,7 @@ const ResultMainPageSecondSection = (props) => {
                                 </tbody>
                             </table>
                             <table className={'secondBlockСarouselTable'}>
-                                <tbody>
+                                <tbody className={'myTbody'}>
                                 <tr>
                                     <td>10.09.2021</td>
                                 </tr>
