@@ -1,8 +1,20 @@
 import '../../styles/MainPages/MainContainerOne.scss';
 import * as React from 'react';
 import {Link} from "react-router-dom";
+import {useEffect} from "react";
 
 function MainContainerOne() {
+    const [isAuthenticated, setIsAuthenticated] = React.useState(false)
+    useEffect(() => {
+        const items = JSON.parse(localStorage.getItem('loginData'));
+        const today = new Date;
+        if (items.accessToken && !(Date.parse(items.expire) <= Date.parse(today.toISOString()))) {
+            setIsAuthenticated(true)
+        } else {
+            setIsAuthenticated(false)
+        }
+
+    }, []);
     return (
         <div className="flex-container">
             <div>
@@ -17,9 +29,12 @@ function MainContainerOne() {
                     в формате PDF на электронную почту.
                 </p>
                 <div className={'answerDiv'}>
-                    <Link to={'search'}>
-                        <button className={'answerButton'}>Запросить данные</button>
-                    </Link>
+                    {isAuthenticated &&
+                        <Link to={'search'}>
+                            <button className={'answerButton'}>Запросить данные</button>
+                        </Link>
+                    }
+
 
                 </div>
             </div>

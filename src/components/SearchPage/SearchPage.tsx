@@ -4,9 +4,11 @@ import TableSearchPage from "./tableSearchPage";
 import {useEffect} from "react";
 import {useMediaQuery} from "react-responsive";
 import BtnSearchPage from "./btnSearchPage";
+import {connect} from "react-redux";
+import loginData from "../../redux/Login";
 
 
-export default function SearchPage() {
+function SearchPage(props) {
     const [toggle, setToggle] = React.useState(false)
 
     const [innError, setInnError] = React.useState('Введите корректные данные')
@@ -85,6 +87,7 @@ export default function SearchPage() {
 
     useEffect(() => {
         setToday(new Date().toISOString().substring(0, 10))
+        console.log('reduxStorage', props.reduxStorage.loginData)
     }, [])
 
     useEffect(() => {
@@ -131,6 +134,12 @@ export default function SearchPage() {
     const isDesktopOrLaptop = useMediaQuery({
         query: '(min-width: 700px)'
     })
+    useEffect(() => {
+        const items = JSON.parse(localStorage.getItem('loginData'));
+        if (items) {
+            console.log('items', items);
+        }
+    }, []);
     return (
         <div className={'searchPage'}>
             <div className={'h1AndP'}>
@@ -239,3 +248,10 @@ export default function SearchPage() {
         </div>
     )
 }
+
+export default connect(
+    state => ({
+        reduxStorage: state,
+    }),
+    dispatch => ({})
+)(SearchPage);

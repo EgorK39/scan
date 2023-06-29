@@ -1,11 +1,13 @@
 import * as React from 'react';
 import '../../styles/login/FormAuthMain.scss';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Simulate} from "react-dom/test-utils";
 import input = Simulate.input;
 import {useEffect} from "react";
+import {connect} from "react-redux";
+import axios from "axios";
 
-export default function FormAuthMain() {
+function FormAuthMain(props) {
     const [login, setLogin] = React.useState('');
     const [password, setPassword] = React.useState('');
 
@@ -23,6 +25,7 @@ export default function FormAuthMain() {
     const refPass = React.useRef(null);
     const [formValid, setFormValid] = React.useState(false)
 
+    const baseUlr = 'https://gateway.scan-interfax.ru';
 
     useEffect(() => {
         if (loginError || passwordError) {
@@ -34,54 +37,69 @@ export default function FormAuthMain() {
     }, [loginError, passwordError])
 
     function funcLogin(value) {
-        setLogin(value)
-        if (login[0] === '+') {
-            setPlaceholder('+79097880981')
-            setType('tel')
-            if (/\D/.test(value.slice(1))) {
-                console.log('value', value)
-                console.log('value.slice(1)', value.slice(1))
-                setLoginFalseOrTrue(true)
-                setLoginError('Введите корректные данные')
-                myRefLog('error', loginFalseOrTrue)
-            } else {
-                setLoginError('')
-                myRefLog('', loginFalseOrTrue)
-                setLoginFalseOrTrue(false)
-
-            }
-
+        setLogin(value.replace(/\s/g, ""))
+        if (login.length < 4) {
+            setLoginFalseOrTrue(true)
+            setLoginError('Введите корректные данные')
+            myRefLog('error', loginFalseOrTrue)
         } else {
-            setPlaceholder('myDiploma')
-            setType('text')
-            if (value.length < 1 && value.length > 16) {
-                setLoginFalseOrTrue(true)
-                setLoginError('Введите корректные данные')
-                myRefLog('error', loginFalseOrTrue)
-            } else {
-                setLoginError('')
-                myRefLog('', loginFalseOrTrue)
-                setLoginFalseOrTrue(false)
+            if (login[0] === '+') {
+                setPlaceholder('+79097880981')
+                setType('tel')
+                if (/\D/.test(login.slice(1))) {
+                    console.log('login', login)
+                    console.log('login.slice(1)', login.slice(1))
+                    setLoginFalseOrTrue(true)
+                    setLoginError('Введите корректные данные')
+                    myRefLog('error', loginFalseOrTrue)
+                } else {
+                    console.log('login', login)
+                    setLoginError('')
+                    myRefLog('', loginFalseOrTrue)
+                    setLoginFalseOrTrue(false)
 
+                }
+
+            } else {
+                setPlaceholder('myDiploma')
+                setType('text')
+                if (login.length < 3 && login.length > 16) {
+                    setLoginFalseOrTrue(true)
+                    setLoginError('Введите корректные данные')
+                    myRefLog('error', loginFalseOrTrue)
+                } else {
+                    setLoginError('')
+                    myRefLog('', loginFalseOrTrue)
+                    setLoginFalseOrTrue(false)
+
+                }
             }
         }
+
     }
 
     const passwordHandler = (e) => {
-        setPassword(e.target.value)
-        if (e.target.value.length < 3 || e.target.value.length > 15) {
-            if (!e.target.value) {
-                setPasswordFalseOrTrue(true)
-                setPasswordError('Неправильный пароль')
-                myRefPassword('error', passwordFalseOrTrue)
-            }
+        setPassword(e.target.value.replace(/\s/g, ''))
+        if (password.length < 3) {
+            setPasswordFalseOrTrue(true)
+            setPasswordError('Неправильный пароль')
+            myRefPassword('error', passwordFalseOrTrue)
         } else {
-            console.log('ok')
-            setPasswordFalseOrTrue(false)
-            setPasswordError('')
-            myRefPassword('', passwordFalseOrTrue)
+            if (password.length < 3 || password.length > 15) {
+                if (!password) {
+                    setPasswordFalseOrTrue(true)
+                    setPasswordError('Неправильный пароль')
+                    myRefPassword('error', passwordFalseOrTrue)
+                }
+            } else {
+                console.log('ok', password)
+                setPasswordFalseOrTrue(false)
+                setPasswordError('')
+                myRefPassword('', passwordFalseOrTrue)
 
+            }
         }
+
 
     }
 
@@ -121,6 +139,74 @@ export default function FormAuthMain() {
 
     }
 
+    /* LOGIN content*/
+    /*login: 'sf_student4', password: 'Br1+tbG' */
+    // "login": String(login), "password": String(password),
+    const navigate = useNavigate();
+    const [status, setStatus] = React.useState(false)
+    const [resData, setResData] = React.useState(
+        {
+            accessToken: '',
+            expire: ''
+        })
+    const myFunc = (res) => {
+        localStorage.removeItem('loginData')
+        setResData({
+            accessToken: res.data.accessToken,
+            expire: res.data.expire
+        })
+        if (res.status === 200) {
+            setStatus(true)
+        } else {
+            console.log('res.status', res.status)
+        }
+        console.log('data', res)
+        console.log('data typeof', typeof res)
+        console.log('accessToken', res.data.accessToken)
+        console.log('expire', res.data.expire)
+        console.log('loginData', JSON.stringify(resData))
+
+
+    }
+    useEffect(() => {
+        if (localStorage.getItem('loginData')) {
+            console.log('Ok')
+        } else {
+            localStorage.setItem('loginData', JSON.stringify(resData))
+            console.log('resData', resData)
+        }
+
+    }, [resData])
+
+    useEffect(() => {
+        if (resData.accessToken && status) {
+            localStorage.setItem('userLogin', JSON.stringify(login))
+            navigate('/search');
+        }
+    }, [resData, status])
+    const sendRequest = (event) => {
+        console.log('!!!!!!!!!!! CLICKED !!!!!!!!!!!!!!!');
+        console.log('login', login)
+        console.log('password', password)
+        const response = axios.post(`${baseUlr}/api/v1/account/login`, JSON.stringify({
+            "login": String(login), "password": String(password),
+        }), {
+            headers: {'Content-Type': 'application/json'}
+        })
+            .then(res => {
+                myFunc(res)
+                return res;
+            })
+
+            .catch(err => {
+                console.log('err', err)
+            })
+        console.log('response', response)
+
+
+    }
+    /* LOGIN content END*/
+
     return (
         <>
             <div className={'login-and-password'}>
@@ -146,8 +232,8 @@ export default function FormAuthMain() {
                         <p> Пароль:</p>
                         <div>
                             <input onBlur={event => blurHandler(event)} onChange={e => passwordHandler(e)}
-                                   name={'password'} type={"password"}
-                                   ref={refPass} placeholder={'Введите Ваш пароль'} required/>
+                                   name={'password'} type={"password"} value={password}
+                                   ref={refPass} placeholder={'Введите Ваш пароль'} maxLength={16} required/>
                             {(passwordFalseOrTrue && passwordError) &&
                                 <p style={{
                                     color: '#FF5959',
@@ -160,9 +246,10 @@ export default function FormAuthMain() {
 
             </div>
             <div className={'entryBtn'}>
-                <button disabled={!formValid}>
+                <button disabled={!formValid} onClick={event => sendRequest(event)}>
                     Войти
                 </button>
+
                 <Link to={'/#'} className={'rebornPassword'}>Восстановить пароль</Link>
             </div>
             <div className={'entryByWhat'}>
@@ -177,3 +264,17 @@ export default function FormAuthMain() {
         </>
     )
 }
+
+export default connect(
+    state => ({
+        reduxStorage: state,
+    }),
+    dispatch => ({
+        setToReduxLogin: (element) => {
+            dispatch({
+                type: 'setSuccessLogin',
+                payload: element
+            })
+        }
+    })
+)(FormAuthMain);
