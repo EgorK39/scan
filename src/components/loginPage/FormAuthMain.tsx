@@ -160,20 +160,18 @@ function FormAuthMain(props) {
         } else {
             console.log('res.status', res.status)
         }
-        console.log('data', res)
-        console.log('data typeof', typeof res)
-        console.log('accessToken', res.data.accessToken)
-        console.log('expire', res.data.expire)
-        console.log('loginData', JSON.stringify(resData))
+        // console.log('data', res)
+        // console.log('data typeof', typeof res)
+        // console.log('accessToken', res.data.accessToken)
+        // console.log('expire', res.data.expire)
+        // console.log('loginData', JSON.stringify(resData))
 
 
     }
     useEffect(() => {
         if (localStorage.getItem('loginData')) {
-            console.log('Ok')
         } else {
             localStorage.setItem('loginData', JSON.stringify(resData))
-            console.log('resData', resData)
         }
 
     }, [resData])
@@ -185,9 +183,6 @@ function FormAuthMain(props) {
         }
     }, [resData, status])
     const sendRequest = (event) => {
-        console.log('!!!!!!!!!!! CLICKED !!!!!!!!!!!!!!!');
-        console.log('login', login)
-        console.log('password', password)
         const response = axios.post(`${baseUlr}/api/v1/account/login`, JSON.stringify({
             "login": String(login), "password": String(password),
         }), {

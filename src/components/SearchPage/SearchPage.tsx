@@ -27,8 +27,12 @@ function SearchPage(props) {
     const [startDate, setStartDate] = React.useState('')
     const [endDate, setEndDate] = React.useState('')
     const [today, setToday] = React.useState('')
+
     const [dateError, setDateError] = React.useState('Введите корректные данные')
     const [formDate, setFormDate] = React.useState(false)
+    const [dateErrorEnd, setDateErrorEnd] = React.useState('Введите корректные данные')
+    const [formDateEnd, setFormDateEnd] = React.useState(false)
+
 
     const [formValid, setFormValid] = React.useState(false)
 
@@ -40,11 +44,9 @@ function SearchPage(props) {
     function func(value) {
         setInnData(value.replace(/\s/g, ""))
         if (/\D/.test(value.replace(/\s/g, ""))) {
-            console.log('=========', value)
             setInn(true)
             setInnError('Введите корректные данные')
         } else {
-            console.log('----------', value)
             setInnError('')
             setInn(false)
 
@@ -63,7 +65,8 @@ function SearchPage(props) {
                 setFormDate(true)
                 break;
             case 'endDateInput':
-                setFormDate(true)
+                // setFormDate(true)
+                setFormDateEnd(true)
                 break;
 
         }
@@ -90,42 +93,59 @@ function SearchPage(props) {
         console.log('reduxStorage', props.reduxStorage.loginData)
     }, [])
 
+
+    /* добавил dateErrorEnd */
     useEffect(() => {
-        if (innError || numberInputError || dateError) {
+        if (innError || numberInputError || dateError || dateErrorEnd) {
             setFormValid(false)
         } else {
             setFormValid(true)
         }
-
-    }, [innError, numberInputError, dateError])
+    }, [innError, numberInputError, dateError, dateErrorEnd])
 
     function changeDate(event) {
+
         switch (event.target.name) {
             case 'startDateInput':
-                if (Date.parse(event.target.value) > Date.parse(today)) {
+                if (!event.target.value) {
                     setDateError('Введите корректные данные')
                 } else {
-                    if (Date.parse(event.target.value) > Date.parse(endDate)) {
+                    if (Date.parse(event.target.value) > Date.parse(today)) {
                         setDateError('Введите корректные данные')
                     } else {
-                        setDateError('')
-                        setStartDate(event.target.value)
+                        if (Date.parse(event.target.value) > Date.parse(endDate)) {
+                            setDateError('Введите корректные данные')
+                        } else {
+                            setDateError('')
+                            setStartDate(event.target.value)
+                            console.log('endDate', endDate)
+                            console.log('today', today)
+                            console.log('event.target.value.length', event.target.value.length)
+                        }
                     }
                 }
                 break;
             case 'endDateInput':
-                if (Date.parse(event.target.value) > Date.parse(today)) {
-                    setDateError('Введите корректные данные')
+                if (!event.target.value) {
+                    setDateErrorEnd('Введите корректные данные')
                 } else {
-                    if (Date.parse(event.target.value) < Date.parse(startDate)) {
-                        setDateError('Введите корректные данные')
+                    if (Date.parse(event.target.value) > Date.parse(today)) {
+                        setDateErrorEnd('Введите корректные данные')
                     } else {
-                        setDateError('')
-                        setEndDate(event.target.value)
+                        if (Date.parse(event.target.value) < Date.parse(startDate)) {
+                            setDateErrorEnd('Введите корректные данные')
+                        } else {
+                            setDateErrorEnd('')
+                            setEndDate(event.target.value)
+                            console.log('endDate', startDate)
+                            console.log('today', today)
+                        }
                     }
                 }
                 break;
         }
+
+
     }
 
     const isMobile = useMediaQuery({
@@ -140,6 +160,8 @@ function SearchPage(props) {
             console.log('items', items);
         }
     }, []);
+
+
     return (
         <div className={'searchPage'}>
             <div className={'h1AndP'}>
@@ -226,7 +248,7 @@ function SearchPage(props) {
                         <input name={'endDateInput'} value={endDate} onChange={event => changeDate(event)}
                                onBlur={event => blurHandler(event)}
                                type={"date"}/>
-                        {(formDate && (dateError)) && (
+                        {((formDate && dateError) || (formDateEnd && dateErrorEnd)) && (
                             <p style={{
                                 color: '#FF5959',
                                 textAlign: "center",
@@ -238,11 +260,25 @@ function SearchPage(props) {
 
                 </div>
                 {isDesktopOrLaptop && (
-                    <TableSearchPage btnToTable={formValid}/>
+                    <TableSearchPage
+                        btnToTable={formValid}
+                        innData={innData}
+                        numFromSearch={num}
+                        anyData={liData}
+                        startDateFromSearch={startDate}
+                        endDateFromSearch={endDate}
+                    />
 
                 )}
                 {isMobile && (
-                    <BtnSearchPage btnToBtn={formValid}/>
+                    <BtnSearchPage
+                        btnToBtn={formValid}
+                        innData={innData}
+                        numFromSearch={num}
+                        anyData={liData}
+                        startDateFromSearch={startDate}
+                        endDateFromSearch={endDate}
+                    />
                 )}
             </div>
         </div>

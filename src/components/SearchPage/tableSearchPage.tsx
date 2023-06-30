@@ -6,7 +6,6 @@ import BtnSearchPage from "./btnSearchPage";
 
 
 const TableSearchPage = (props) => {
-    console.log('77777777777777', props.reduxStorage)
     const refOne = React.useRef(null)
     const refTwo = React.useRef(null)
     const refThree = React.useRef(null)
@@ -69,7 +68,14 @@ const TableSearchPage = (props) => {
                     </tr>}
                 </tbody>
             </table>
-            <BtnSearchPage btnToBtn={props.btnToTable}/>
+            <BtnSearchPage
+                btnToBtn={props.btnToTable}
+                innData={props.innData}
+                numFromSearch={props.numFromSearch}
+                anyData={props.anyData}
+                startDateFromSearch={props.startDateFromSearch}
+                endDateFromSearch={props.endDateFromSearch}
+            />
         </div>
     )
 }

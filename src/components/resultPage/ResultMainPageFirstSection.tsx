@@ -4,12 +4,12 @@ import {useMediaQuery} from "react-responsive";
 
 
 export default function ResultMainPageFirstSection() {
-    const isMobile = useMediaQuery({
-        query: '(max-width: 699px)'
-    })
-    const isDesktopOrLaptop = useMediaQuery({
-        query: '(min-width: 700px)'
-    })
+    // const isMobile = useMediaQuery({
+    //     query: '(max-width: 699px)'
+    // })
+    // const isDesktopOrLaptop = useMediaQuery({
+    //     query: '(min-width: 700px)'
+    // })
     return (
         <div className={'resultMainPageFirstSection'}>
             <div>
