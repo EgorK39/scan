@@ -23,34 +23,35 @@ function ResultObjectSearch(props) {
         const items = JSON.parse(localStorage.getItem('loginData'))
         const posts = JSON.parse(localStorage.getItem('encodedId'))
         console.log('1')
+        const timer = setTimeout(() => {
+            if (items.accessToken && posts) {
+                console.log('3')
+                console.log('4 props.reduxStorage.objectSearch', props.reduxStorage.objectSearch)
+                console.log('5 posts', posts)
 
-        if (items.accessToken && posts) {
-            console.log('3')
-            console.log('4 props.reduxStorage.objectSearch', props.reduxStorage.objectSearch)
-            console.log('5 posts', posts)
+                for (let index = 0; index < 10; index++) {
+                    axios.post(baseUrl + '/api/v1/documents',
+                        {
+                            "ids": [posts[index].encodedId
+                            ]
+                        },
+                        {
+                            headers: {
+                                'Authorization': `Bearer ${items.accessToken}`,
+                                'Content-Type': 'application/json-patch+json'
+                            }
 
-            for (let index = 0; index < 10; index++) {
-                axios.post(baseUrl + '/api/v1/documents',
-                    {
-                        "ids": [posts[index].encodedId
-                        ]
-                    },
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${items.accessToken}`,
-                            'Content-Type': 'application/json-patch+json'
-                        }
-
-                    })
-                    .then(res => {
-                        setPosts1_10(posts1_10 => [...posts1_10, res.data[0]])
-                        return res.data
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    })
+                        })
+                        .then(res => {
+                            setPosts1_10(posts1_10 => [...posts1_10, res.data[0]])
+                            return res.data
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                }
             }
-        }
+        }, 1500)
 
 
     }, [])

@@ -13,9 +13,14 @@ const HeaderTable = (props) => {
     const baseUlr = 'https://gateway.scan-interfax.ru';
 
     useEffect(() => {
-        localStorage.setItem('encodedId', JSON.stringify(''))
-        localStorage.setItem('userLogin', JSON.stringify(''))
-        localStorage.setItem('loginData', JSON.stringify(''))
+        if (localStorage.getItem('loginData')) {
+
+        } else {
+            localStorage.setItem('userLogin', JSON.stringify(''))
+            localStorage.setItem('loginData', JSON.stringify(''))
+            localStorage.setItem('encodedId', JSON.stringify(''))
+        }
+
     }, [])
 
     function eventFiltersInfoFunc(res) {
