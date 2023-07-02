@@ -1,10 +1,9 @@
 import * as React from "react";
 import "../../styles/resultPage/resultMainPageThirdSection.scss";
-// import ResultMainPageThirdSectionMainInfo from "./ResultMainPageThirdSectionMainInfo";
 import {lazy, useEffect} from "react";
 import {connect} from "react-redux";
 import axios from "axios";
-import objectSearch from "../../redux/ObjectSearch";
+import ResultObjectSearch from "./ResultObjectSearch";
 
 const ResultMainPageThirdSectionMainInfo = lazy(() => import('./ResultMainPageThirdSectionMainInfo'));
 
@@ -97,25 +96,42 @@ const ResultMainPageThirdSection = (props) => {
 
     }, [props.tokenFromMainPage])
 
+
     const objectSearchFunc = (data) => {
         console.log('objectsearch', data)
         console.log('objectsearch.items', data.items)
         props.setToRedux(data.items)
+        localStorage.setItem('encodedId', JSON.stringify(data.items))
         setIsLoaded(true)
 
     }
+
     useEffect(() => {
         if (isLoaded) {
             console.log('props.reduxStorage.objectSearch', props.reduxStorage.objectSearch)
         }
     }, [isLoaded])
+
+
+    // const getAnimalsContent = (objectSearch) => {
+    //     let content = [];
+    //     for (let i = 1; i === animals.length; i++) {
+    //         const item = animals[i];
+    //         content.push(<li key={item.id}>{item.animal}</li>);
+    //     }
+    //     return content;
+    // };
+
     return (
         <div className={'resultMainPageThirdSection'}>
             <h1>Список документов</h1>
+            <ResultObjectSearch
+                tokenFromThird={props.tokenFromMainPage}/>
             {load && (
                 <ResultMainPageThirdSectionMainInfo/>
             )}
-
+            {
+            }
             <button onClick={event => {
                 startTransition(() => {
                     setLoad(true)

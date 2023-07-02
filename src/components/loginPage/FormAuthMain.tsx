@@ -172,6 +172,7 @@ function FormAuthMain(props) {
         if (localStorage.getItem('loginData')) {
         } else {
             localStorage.setItem('loginData', JSON.stringify(resData))
+            localStorage.setItem('encodedId',JSON.stringify(''))
         }
 
     }, [resData])

@@ -61,6 +61,7 @@ function Header(props) {
         if (loginDataState && userLoginState) {
             localStorage.setItem('loginData', JSON.stringify(''))
             localStorage.setItem('userLogin', JSON.stringify(''))
+            localStorage.setItem('encodedId', JSON.stringify(''))
             setLoginDataState('')
             setUserLoginState('')
             navigate('/');

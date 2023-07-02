@@ -8,6 +8,7 @@ import HistogramsData from "./HistogramsData";
 import SearchingData from "./SearchingData";
 import objectSearch from "./ObjectSearch";
 
+
 export default combineReducers({
     changeTariffs, changeUrls, searchParameters,
     loginData, setUserLogin, HistogramsData, SearchingData,
