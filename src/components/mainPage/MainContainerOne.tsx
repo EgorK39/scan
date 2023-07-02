@@ -5,6 +5,13 @@ import {useEffect} from "react";
 
 function MainContainerOne() {
     const [isAuthenticated, setIsAuthenticated] = React.useState(false)
+
+    useEffect(() => {
+        localStorage.setItem('encodedId', JSON.stringify(''))
+        localStorage.setItem('userLogin', JSON.stringify(''))
+        localStorage.setItem('loginData', JSON.stringify(''))
+    }, [])
+
     useEffect(() => {
         const items = JSON.parse(localStorage.getItem('loginData'));
         const today = new Date;

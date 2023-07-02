@@ -12,6 +12,12 @@ const HeaderTable = (props) => {
 
     const baseUlr = 'https://gateway.scan-interfax.ru';
 
+    useEffect(() => {
+        localStorage.setItem('encodedId', JSON.stringify(''))
+        localStorage.setItem('userLogin', JSON.stringify(''))
+        localStorage.setItem('loginData', JSON.stringify(''))
+    }, [])
+
     function eventFiltersInfoFunc(res) {
         console.log('hereisRES', res.data)
         setUsedCompanies(res.data.eventFiltersInfo.companyLimit)
