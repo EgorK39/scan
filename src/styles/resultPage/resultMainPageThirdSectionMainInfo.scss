@@ -97,6 +97,33 @@
   }
 }
 
+.thirdSectionShowMore {
+  position: relative;
+  transform: translate(-50%);
+  left: 50%;
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  width: 300px;
+  height: 40px;
+
+  padding: 10px 15px;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: full-width;
+  color: $base-main-white-color;
+  background: $base-second-blue-color;
+  transition: 0.2s;
+
+  &:hover {
+    box-shadow: 0px 2px 8px 2px rgba(141, 150, 178, .3);
+    transform: translate(-50%) scale(1.02);
+  }
+}
+
 @media screen and (max-width: 699px) {
   .allPosts {
     grid-template-columns: 1fr;

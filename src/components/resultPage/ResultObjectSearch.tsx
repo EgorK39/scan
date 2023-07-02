@@ -2,12 +2,19 @@ import * as React from "react";
 import "../../styles/resultPage/resultMainPageThirdSectionMainInfo.scss";
 import {connect} from "react-redux";
 import axios from "axios";
-import {useEffect} from "react";
+import {lazy, useEffect} from "react";
 import {ThreeDots} from 'react-loader-spinner';
 import {Link} from "react-router-dom";
 
+const ResultMainPageThirdSectionMainInfo = lazy(() => import('./ResultMainPageThirdSectionMainInfo'));
+
 
 function ResultObjectSearch(props) {
+
+    const [load, setLoad] = React.useState(false);
+    const [, startTransition] = React.useTransition();
+    const [isClicked, setIsClicked] = React.useState(false)
+
     const [posts1_10, setPosts1_10] = React.useState([])
     const [isLoaded, setIsLoaded] = React.useState(false)
     const baseUrl = 'https://gateway.scan-interfax.ru'
@@ -66,7 +73,7 @@ function ResultObjectSearch(props) {
 
                 <div className={'allPosts'}>
                     {posts1_10.map((el, i) =>
-                        <div className={'post'}>
+                        <div key={el.ok.id} className={'post'}>
                             <div className={'postMargin'}>
                                 <div className={'postHeader'}>
                                     <ul className={'postHeaderUl'}>
@@ -99,6 +106,7 @@ function ResultObjectSearch(props) {
 
                         </div>
                     )}
+
                 </div>
 
                 :
@@ -113,6 +121,21 @@ function ResultObjectSearch(props) {
                 />
 
             }
+            {load && (
+                <ResultMainPageThirdSectionMainInfo/>
+            )}
+            {isClicked ? '' :
+                <button onClick={event => {
+                    startTransition(() => {
+                        setLoad(true)
+                        setIsClicked(true)
+
+                    })
+                }
+                } className={'thirdSectionShowMore'}>Показать больше
+                </button>
+            }
+
         </>
 
     )

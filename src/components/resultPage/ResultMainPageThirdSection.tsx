@@ -1,15 +1,13 @@
 import * as React from "react";
 import "../../styles/resultPage/resultMainPageThirdSection.scss";
-import {lazy, useEffect} from "react";
+import {useEffect} from "react";
 import {connect} from "react-redux";
 import axios from "axios";
 import ResultObjectSearch from "./ResultObjectSearch";
 
-const ResultMainPageThirdSectionMainInfo = lazy(() => import('./ResultMainPageThirdSectionMainInfo'));
 
 const ResultMainPageThirdSection = (props) => {
-    const [load, setLoad] = React.useState(false);
-    const [, startTransition] = React.useTransition();
+
     const [isLoaded, setIsLoaded] = React.useState(false)
 
 
@@ -127,18 +125,7 @@ const ResultMainPageThirdSection = (props) => {
             <h1>Список документов</h1>
             <ResultObjectSearch
                 tokenFromThird={props.tokenFromMainPage}/>
-            {load && (
-                <ResultMainPageThirdSectionMainInfo/>
-            )}
-            {
-            }
-            <button onClick={event => {
-                startTransition(() => {
-                    setLoad(true)
-                })
-            }
-            } className={'thirdSectionShowMore'}>Показать больше
-            </button>
+
         </div>
     )
 }
