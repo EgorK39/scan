@@ -2,7 +2,6 @@ import * as React from 'react';
 import '../styles/Main/Footer.scss';
 
 function Footer() {
-    console.log('hi from footer');
     return (
         <>
             <footer className={'footer font-inter'}>

@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import axios from "axios";
 import {lazy, useEffect} from "react";
 import {ThreeDots} from 'react-loader-spinner';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const ResultMainPageThirdSectionMainInfo = lazy(() => import('./ResultMainPageThirdSectionMainInfo'));
 
@@ -44,6 +44,7 @@ function ResultObjectSearch(props) {
                         })
                         .then(res => {
                             setPosts1_10(posts1_10 => [...posts1_10, res.data[0]])
+                            setResCount(resCount += 1)
                             return res.data
                         })
                         .catch(err => {
@@ -51,10 +52,32 @@ function ResultObjectSearch(props) {
                         })
                 }
             }
-        }, 1500)
+        }, 1000)
+    }, [])
 
+
+    /* refresh page */
+
+    // const navigate = useNavigate();
+    let [resCount, setResCount] = React.useState(0)
+
+    useEffect(() => {
+
+        console.log('1')
+        const timer = setInterval(() => {
+            console.log('2')
+            if (resCount == 10) {
+                console.log('resCount', resCount)
+                clearInterval(timer)
+
+            } else {
+                console.log('resCount', resCount)
+                window.location.reload()
+            }
+        }, 3000)
 
     }, [])
+
 
     useEffect(() => {
         if (posts1_10.length === 10) {
@@ -62,12 +85,10 @@ function ResultObjectSearch(props) {
             console.log('posts1_10[0] 49', posts1_10[0])
             console.log('posts1_10[0].ok 49', posts1_10[0].ok)
             setIsLoaded(true)
-
-
         }
-
-
     }, [posts1_10])
+
+
     return (
         <>
             {isLoaded ?

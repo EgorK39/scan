@@ -11,6 +11,7 @@ const ResultMainPageSecondSection = (props) => {
 
     const [foundVariants, setFoundVariants] = useState(0)
 
+
     const ref = React.useRef(null);
 
 
@@ -21,8 +22,16 @@ const ResultMainPageSecondSection = (props) => {
         query: '(min-width: 700px)'
     })
     useEffect(() => {
-        const totalDocuments = props.reduxStorage.HistogramsData.totalDocuments[0]
-        const riskFactors = props.reduxStorage.HistogramsData.riskFactors[0]
+        // const totalDocuments = props.reduxStorage.HistogramsData.totalDocuments[0]
+        // const riskFactors = props.reduxStorage.HistogramsData.riskFactors[0]
+
+
+        if (props.reduxStorage.HistogramsData.totalDocuments[0] && props.reduxStorage.HistogramsData.riskFactors[0]) {
+            localStorage.setItem('TotalDocuments', JSON.stringify(props.reduxStorage.HistogramsData.totalDocuments[0]))
+            localStorage.setItem('riskFactors', JSON.stringify(props.reduxStorage.HistogramsData.riskFactors[0]))
+        } else {
+            console.log('empty')
+        }
 
         // console.log('props.reduxStorage.HistogramsData', props.reduxStorage.HistogramsData)
         // console.log('props.reduxStorage.HistogramsData.totalDocuments', props.reduxStorage.HistogramsData.totalDocuments)
@@ -35,6 +44,24 @@ const ResultMainPageSecondSection = (props) => {
         //     console.log(el)
         // }))
 
+        // if (totalDocuments && riskFactors) {
+        //     let firsti = 0
+        //     let secondi = 0
+        //     for (let i = 0; i < totalDocuments.length; i++) {
+        //         firsti += totalDocuments[i].value
+        //         secondi += riskFactors[i].value
+        //     }
+        //     setFoundVariants(firsti + secondi)
+        // } else {
+        //     console.log('в другой раз')
+        // }
+
+    }, [])
+
+    useEffect(() => {
+        const totalDocuments = JSON.parse(localStorage.getItem('TotalDocuments'))
+        const riskFactors = JSON.parse(localStorage.getItem('riskFactors'))
+
         if (totalDocuments && riskFactors) {
             let firsti = 0
             let secondi = 0
@@ -46,8 +73,8 @@ const ResultMainPageSecondSection = (props) => {
         } else {
             console.log('в другой раз')
         }
-
     }, [])
+
     useEffect(() => {
         // console.log('myRef', ref)
         setCount(0)
@@ -124,8 +151,8 @@ const ResultMainPageSecondSection = (props) => {
                         </div>
                         <div ref={ref} style={{transform: `translateX(-${count}px)`}}
                              className={'mainBlockСarousel font-inter'}>
-                            {props.reduxStorage.HistogramsData.totalDocuments[0] ?
-                                props.reduxStorage.HistogramsData.totalDocuments[0].map((element, index) =>
+                            {JSON.parse(localStorage.getItem('TotalDocuments')) ?
+                                JSON.parse(localStorage.getItem('TotalDocuments')).map((element, index) =>
                                     <table key={element.date} className={'secondBlockСarouselTable'}>
                                         <tbody className={'myTbody'}>
                                         <tr>
@@ -136,7 +163,7 @@ const ResultMainPageSecondSection = (props) => {
                                             <td>{element.value}</td>
                                         </tr>
                                         <tr>
-                                            <td>{props.reduxStorage.HistogramsData.riskFactors[0][index].value}</td>
+                                            <td>{JSON.parse(localStorage.getItem('riskFactors'))[index].value}</td>
                                         </tr>
                                         </tbody>
                                     </table>

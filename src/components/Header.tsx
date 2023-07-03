@@ -71,6 +71,8 @@ function Header(props) {
             localStorage.setItem('loginData', JSON.stringify(''))
             localStorage.setItem('userLogin', JSON.stringify(''))
             localStorage.setItem('encodedId', JSON.stringify(''))
+            localStorage.setItem('TotalDocuments', JSON.stringify(''))
+            localStorage.setItem('riskFactors', JSON.stringify(''))
             setLoginDataState('')
             setUserLoginState('')
             navigate('/');

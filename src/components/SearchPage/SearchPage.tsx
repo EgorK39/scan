@@ -223,7 +223,7 @@ function SearchPage(props) {
                     </div>
                     <div className={'enterDocs'}>
                         <p className={'countOfDocs'}>Количество документов в выдаче</p>
-                        <input className={'myNumInput'} name={'numInput'}
+                        <input className={'myNumInput'} name={'numInput'} autoComplete={'off'}
                                onBlur={event => blurHandler(event)}
                                onChange={event => {
                                    changeNum(event.target.value)

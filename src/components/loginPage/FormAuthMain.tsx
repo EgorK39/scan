@@ -38,15 +38,15 @@ function FormAuthMain(props) {
 
     function funcLogin(value) {
         setLogin(value.replace(/\s/g, ""))
-        if (login.length < 4) {
+        if (value.length < 4) {
             setLoginFalseOrTrue(true)
             setLoginError('Введите корректные данные')
             myRefLog('error', loginFalseOrTrue)
         } else {
-            if (login[0] === '+') {
+            if (value[0] === '+') {
                 setPlaceholder('+79097880981')
                 setType('tel')
-                if (/\D/.test(login.slice(1))) {
+                if (/\D/.test(value.slice(1))) {
                     console.log('login', login)
                     console.log('login.slice(1)', login.slice(1))
                     setLoginFalseOrTrue(true)
@@ -63,11 +63,12 @@ function FormAuthMain(props) {
             } else {
                 setPlaceholder('myDiploma')
                 setType('text')
-                if (login.length < 3 && login.length > 16) {
+                if (value.length < 3 && value.length > 16) {
                     setLoginFalseOrTrue(true)
                     setLoginError('Введите корректные данные')
                     myRefLog('error', loginFalseOrTrue)
                 } else {
+                    console.log('login', login)
                     setLoginError('')
                     myRefLog('', loginFalseOrTrue)
                     setLoginFalseOrTrue(false)
@@ -75,24 +76,23 @@ function FormAuthMain(props) {
                 }
             }
         }
-
     }
 
     const passwordHandler = (e) => {
         setPassword(e.target.value.replace(/\s/g, ''))
-        if (password.length < 3) {
+        if (e.target.value.length < 3) {
             setPasswordFalseOrTrue(true)
             setPasswordError('Неправильный пароль')
             myRefPassword('error', passwordFalseOrTrue)
         } else {
-            if (password.length < 3 || password.length > 15) {
-                if (!password) {
+            if (e.target.value.length < 3 || e.target.value.length > 15) {
+                if (!e.target.value) {
                     setPasswordFalseOrTrue(true)
                     setPasswordError('Неправильный пароль')
                     myRefPassword('error', passwordFalseOrTrue)
                 }
             } else {
-                console.log('ok', password)
+                console.log('ok', e.target.value)
                 setPasswordFalseOrTrue(false)
                 setPasswordError('')
                 myRefPassword('', passwordFalseOrTrue)
@@ -172,7 +172,7 @@ function FormAuthMain(props) {
         if (localStorage.getItem('loginData')) {
         } else {
             localStorage.setItem('loginData', JSON.stringify(resData))
-            localStorage.setItem('encodedId',JSON.stringify(''))
+            localStorage.setItem('encodedId', JSON.stringify(''))
         }
 
     }, [resData])

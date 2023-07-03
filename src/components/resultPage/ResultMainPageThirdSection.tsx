@@ -4,6 +4,7 @@ import {useEffect} from "react";
 import {connect} from "react-redux";
 import axios from "axios";
 import ResultObjectSearch from "./ResultObjectSearch";
+import {useNavigate} from "react-router-dom";
 
 
 const ResultMainPageThirdSection = (props) => {
