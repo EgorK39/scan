@@ -101,7 +101,6 @@ function ResultObjectSearch(props) {
     let [resCountLessThanTen, setResCountLessThanTen] = React.useState(0)
 
 
-
     useEffect(() => {
         const posts = JSON.parse(localStorage.getItem('encodedId'))
 
