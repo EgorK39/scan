@@ -17,73 +17,152 @@ function ResultObjectSearch(props) {
 
     const [posts1_10, setPosts1_10] = React.useState([])
     const [isLoaded, setIsLoaded] = React.useState(false)
+    const [count, setCount] = React.useState(0)
+    const [mainCount, setMainCount] = React.useState(0)
     const baseUrl = 'https://gateway.scan-interfax.ru'
+
+
+    // const [posts, setPosts] = React.useState([])
+
+    // useEffect(() => {
+    //     const posts = JSON.parse(localStorage.getItem('encodedId'))
+    //     setPosts(posts)
+    // }, [])
+
 
     useEffect(() => {
         const items = JSON.parse(localStorage.getItem('loginData'))
         const posts = JSON.parse(localStorage.getItem('encodedId'))
+        setCount(posts.length)
+        console.log('len', posts.length)
+        setMainCount(posts.length)
         const timer = setTimeout(() => {
             if (items.accessToken && posts) {
                 console.log('3')
                 console.log('4 props.reduxStorage.objectSearch', props.reduxStorage.objectSearch)
                 console.log('5 posts', posts)
+                if (posts.length <= 10) {
+                    for (let index = 0; index < posts.length; index++) {
+                        axios.post(baseUrl + '/api/v1/documents',
+                            {
+                                "ids": [posts[index].encodedId
+                                ]
+                            },
+                            {
+                                headers: {
+                                    'Authorization': `Bearer ${items.accessToken}`,
+                                    'Content-Type': 'application/json-patch+json'
+                                }
 
-                for (let index = 0; index < 10; index++) {
-                    axios.post(baseUrl + '/api/v1/documents',
-                        {
-                            "ids": [posts[index].encodedId
-                            ]
-                        },
-                        {
-                            headers: {
-                                'Authorization': `Bearer ${items.accessToken}`,
-                                'Content-Type': 'application/json-patch+json'
-                            }
+                            })
+                            .then(res => {
+                                setPosts1_10(posts1_10 => [...posts1_10, res.data[0]])
+                                setResCountLessThanTen(resCountLessThanTen += 1)
+                                return res.data
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
+                    }
+                } else {
+                    for (let index = 0; index < 10; index++) {
+                        axios.post(baseUrl + '/api/v1/documents',
+                            {
+                                "ids": [posts[index].encodedId
+                                ]
+                            },
+                            {
+                                headers: {
+                                    'Authorization': `Bearer ${items.accessToken}`,
+                                    'Content-Type': 'application/json-patch+json'
+                                }
 
-                        })
-                        .then(res => {
-                            setPosts1_10(posts1_10 => [...posts1_10, res.data[0]])
-                            setResCount(resCount += 1)
-                            return res.data
-                        })
-                        .catch(err => {
-                            console.log(err)
-                        })
+                            })
+                            .then(res => {
+                                setPosts1_10(posts1_10 => [...posts1_10, res.data[0]])
+                                setResCountMoreThenTen(resCountMoreThenTen += 1)
+                                return res.data
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
+                    }
                 }
+
             }
-        }, 1000)
+        }, 500)
     }, [])
 
 
     /* refresh page */
 
     // const navigate = useNavigate();
-    let [resCount, setResCount] = React.useState(0)
+    let [resCountMoreThenTen, setResCountMoreThenTen] = React.useState(0)
+    let [resCountLessThanTen, setResCountLessThanTen] = React.useState(0)
+
 
     useEffect(() => {
+        const posts = JSON.parse(localStorage.getItem('encodedId'))
 
-        console.log('1')
+
         const timer = setInterval(() => {
-            console.log('2')
-            if (resCount == 10) {
-                console.log('resCount', resCount)
-                clearInterval(timer)
-
-            } else {
-                console.log('resCount', resCount)
+            if (resCountLessThanTen == posts.length) {
+                console.log('ok')
                 window.location.reload()
+                clearInterval(timer)
+            } else {
+                if (resCountMoreThenTen == 10) {
+                    console.log('ok')
+                    window.location.reload()
+                    clearInterval(timer)
+                } else {
+                    console.log('err')
+                }
             }
-        }, 3000)
+
+
+        }, 2500)
+
+
+        // console.log('1')
+        // const timer = setInterval(() => {
+        //     console.log('2')
+        //     if ((posts.length <= 10) && (resCountLessThanTen == posts.length)) {
+        //         console.log('resCount', resCountLessThanTen)
+        //         clearInterval(timer)
+        //     } else {
+        //         if (resCountMoreThenTen == 10) {
+        //             console.log('resCount', resCountMoreThenTen)
+        //             clearInterval(timer)
+        //
+        //         } else {
+        //             console.log('resCount', resCountMoreThenTen)
+        //             window.location.reload()
+        //         }
+        //     }
+        //
+        // }, 2500)
 
     }, [])
 
 
     useEffect(() => {
-        if (posts1_10.length === 10) {
+        const posts = JSON.parse(localStorage.getItem('encodedId'))
+        console.log('posts len', posts.length)
+
+        if (posts.length <= 10 && posts1_10.length === posts.length) {
             console.log('posts1_10 49', posts1_10)
             console.log('posts1_10[0] 49', posts1_10[0])
             console.log('posts1_10[0].ok 49', posts1_10[0].ok)
             setIsLoaded(true)
+        } else {
+            if (posts1_10.length === 10) {
+                console.log('posts1_10 49', posts1_10)
+                console.log('posts1_10[0] 49', posts1_10[0])
+                console.log('posts1_10[0].ok 49', posts1_10[0].ok)
+                setIsLoaded(true)
+            }
+
         }
     }, [posts1_10])
 
@@ -145,17 +224,21 @@ function ResultObjectSearch(props) {
             {load && (
                 <ResultMainPageThirdSectionMainInfo/>
             )}
-            {isClicked ? '' :
-                <button onClick={event => {
-                    startTransition(() => {
-                        setLoad(true)
-                        setIsClicked(true)
+            {mainCount > 10 ? <>
+                {
+                    isClicked ? '' :
+                        <button onClick={event => {
+                            startTransition(() => {
+                                setLoad(true)
+                                setIsClicked(true)
 
-                    })
+                            })
+                        }
+                        } className={'thirdSectionShowMore'}>Показать больше
+                        </button>
                 }
-                } className={'thirdSectionShowMore'}>Показать больше
-                </button>
-            }
+            </> : ''}
+
 
         </>
 
