@@ -101,47 +101,29 @@ function ResultObjectSearch(props) {
     let [resCountLessThanTen, setResCountLessThanTen] = React.useState(0)
 
 
+
     useEffect(() => {
         const posts = JSON.parse(localStorage.getItem('encodedId'))
 
 
+        console.log('1')
         const timer = setInterval(() => {
-            if (resCountLessThanTen == posts.length) {
-                console.log('ok')
-                window.location.reload()
+            console.log('2')
+            if ((posts.length <= 10) && (resCountLessThanTen == posts.length)) {
+                console.log('resCount', resCountLessThanTen)
                 clearInterval(timer)
             } else {
                 if (resCountMoreThenTen == 10) {
-                    console.log('ok')
-                    window.location.reload()
+                    console.log('resCount', resCountMoreThenTen)
                     clearInterval(timer)
+
                 } else {
-                    console.log('err')
+                    console.log('resCount', resCountMoreThenTen)
+                    window.location.reload()
                 }
             }
 
-
         }, 2500)
-
-
-        // console.log('1')
-        // const timer = setInterval(() => {
-        //     console.log('2')
-        //     if ((posts.length <= 10) && (resCountLessThanTen == posts.length)) {
-        //         console.log('resCount', resCountLessThanTen)
-        //         clearInterval(timer)
-        //     } else {
-        //         if (resCountMoreThenTen == 10) {
-        //             console.log('resCount', resCountMoreThenTen)
-        //             clearInterval(timer)
-        //
-        //         } else {
-        //             console.log('resCount', resCountMoreThenTen)
-        //             window.location.reload()
-        //         }
-        //     }
-        //
-        // }, 2500)
 
     }, [])
 
