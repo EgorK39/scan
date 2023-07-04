@@ -4,7 +4,6 @@ import {useEffect} from "react";
 import {connect} from "react-redux";
 import axios from "axios";
 import ResultObjectSearch from "./ResultObjectSearch";
-import {useNavigate} from "react-router-dom";
 
 
 const ResultMainPageThirdSection = (props) => {
@@ -97,11 +96,16 @@ const ResultMainPageThirdSection = (props) => {
 
 
     const objectSearchFunc = (data) => {
-        console.log('objectsearch', data)
-        console.log('objectsearch.items', data.items)
-        props.setToRedux(data.items)
-        localStorage.setItem('encodedId', JSON.stringify(data.items))
-        setIsLoaded(true)
+        if (data) {
+            console.log('objectsearch', data)
+            console.log('objectsearch.items', data.items)
+            props.setToRedux(data.items)
+            localStorage.setItem('encodedId', JSON.stringify(data.items))
+            setIsLoaded(true)
+        } else {
+            console.log('данных нет')
+        }
+
 
     }
 

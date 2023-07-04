@@ -22,7 +22,6 @@ function ResultObjectSearch(props) {
     useEffect(() => {
         const items = JSON.parse(localStorage.getItem('loginData'))
         const posts = JSON.parse(localStorage.getItem('encodedId'))
-        console.log('1')
         const timer = setTimeout(() => {
             if (items.accessToken && posts) {
                 console.log('3')
