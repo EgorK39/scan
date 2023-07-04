@@ -157,6 +157,8 @@ function SearchPage(props) {
     useEffect(() => {
         const items = JSON.parse(localStorage.getItem('loginData'));
         localStorage.setItem('encodedId', JSON.stringify(''))
+        localStorage.setItem('loaded', JSON.stringify(''))
+
         if (items) {
             console.log('items', items);
         }

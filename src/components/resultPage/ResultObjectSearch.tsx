@@ -94,8 +94,6 @@ function ResultObjectSearch(props) {
     }, [])
 
 
-    /* refresh page */
-
     // const navigate = useNavigate();
     let [resCountMoreThenTen, setResCountMoreThenTen] = React.useState(0)
     let [resCountLessThanTen, setResCountLessThanTen] = React.useState(0)
@@ -140,6 +138,29 @@ function ResultObjectSearch(props) {
         }
     }, [posts1_10])
 
+    /* refresh page */
+
+
+    const domLoadedFunc = (e) => {
+        console.log('!!!event!!!!', e)
+        localStorage.setItem('loaded', JSON.stringify('isLoaded'))
+    }
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('loaded'))) {
+            console.log('what', JSON.parse(localStorage.getItem('loaded')))
+        } else {
+            const interval = setInterval(() => {
+                if (JSON.parse(localStorage.getItem('loaded'))) {
+                    clearInterval(interval)
+                } else {
+                    window.location.reload()
+                    clearInterval(interval)
+                }
+            }, 2500)
+        }
+
+    }, [])
 
     return (
         <>
@@ -147,7 +168,7 @@ function ResultObjectSearch(props) {
 
                 <div className={'allPosts'}>
                     {posts1_10.map((el, i) =>
-                        <div key={el.ok.id} className={'post'}>
+                        <div onLoad={event => domLoadedFunc(event)} key={el.ok.id} className={'post'}>
                             <div className={'postMargin'}>
                                 <div className={'postHeader'}>
                                     <ul className={'postHeaderUl'}>
