@@ -132,14 +132,11 @@ function ResultObjectSearch(props) {
         console.log('posts len', posts.length)
 
         if (posts.length <= 10 && posts1_10.length === posts.length) {
-
             setIsLoaded(true)
         } else {
             if (posts1_10.length === 10) {
-
                 setIsLoaded(true)
             }
-
         }
     }, [posts1_10])
 
