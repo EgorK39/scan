@@ -14,8 +14,13 @@ const ResultMainPageThirdSection = (props) => {
     useEffect(() => {
         const baseUrl = 'https://gateway.scan-interfax.ru'
 
-        console.log('99999', props.reduxStorage.SearchingData)
-        if (props.tokenFromMainPage) {
+        console.log('search data', props.reduxStorage.SearchingData)
+        console.log('token from props', props.tokenFromMainPage)
+        const token = JSON.parse(localStorage.getItem('loginData'))
+        console.log('token from localStorage', token.accessToken)
+
+
+        if (token.accessToken && props.reduxStorage.SearchingData.innData) {
             axios.post(baseUrl + '/api/v1/objectsearch',
                 {
 
@@ -78,7 +83,7 @@ const ResultMainPageThirdSection = (props) => {
                 },
                 {
                     headers: {
-                        'Authorization': `Bearer ${props.tokenFromMainPage}`,
+                        'Authorization': `Bearer ${token.accessToken}`,
                         'Content-Type': 'application/json-patch+json'
                     }
                 },
@@ -89,10 +94,10 @@ const ResultMainPageThirdSection = (props) => {
                 console.log('response Error', err)
             })
         } else {
-            console.log('token empty', props.tokenFromMainPage)
+            console.log('token and inn are empty', token.accessToken)
         }
 
-    }, [props.tokenFromMainPage])
+    }, [])
 
 
     const objectSearchFunc = (data) => {
