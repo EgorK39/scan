@@ -132,15 +132,11 @@ function ResultObjectSearch(props) {
         console.log('posts len', posts.length)
 
         if (posts.length <= 10 && posts1_10.length === posts.length) {
-            console.log('posts1_10 49', posts1_10)
-            console.log('posts1_10[0] 49', posts1_10[0])
-            console.log('posts1_10[0].ok 49', posts1_10[0].ok)
+
             setIsLoaded(true)
         } else {
             if (posts1_10.length === 10) {
-                console.log('posts1_10 49', posts1_10)
-                console.log('posts1_10[0] 49', posts1_10[0])
-                console.log('posts1_10[0].ok 49', posts1_10[0].ok)
+
                 setIsLoaded(true)
             }
 
